@@ -1,0 +1,35 @@
+#bottom-tab {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    bottom: 0;
+    height: 50px;
+    z-index: 5;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+#bottom-tab nav {
+    display: flex;
+    flex: 1;
+    width: 100%;
+}
+
+#bottom-tab nav ul{
+    display: flex;
+    list-style: none;
+    width: 100%;
+}
+
+#bottom-tab nav ul li{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
+    width: 100%;
+}
+
+#bottom-tab nav ul li a {
+    -webkit-tap-highlight-color: transparent;
+}
