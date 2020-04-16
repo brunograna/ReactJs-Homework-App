@@ -13,30 +13,22 @@ function BottomTab() {
                 <ul>
                     <li>
                         <Link to="/">
-                            <HomeOutlinedIcon
-                                style={{ color: '#FC206C', fontSize: 30 }}
-                            />
+                            <HomeOutlinedIcon className="icon" />
                         </Link>
                     </li>
                     <li>
                         <Link to="/activities/add">
-                            <AddCircleOutlineOutlinedIcon
-                                style={{ color: '#FC206C', fontSize: 30 }}
-                            />
+                            <AddCircleOutlineOutlinedIcon className="icon" />
                         </Link>
                     </li>
                     <li>
                         <Link to="/activities/me">
-                            <ListAltOutlinedIcon
-                                style={{ color: '#FC206C', fontSize: 30 }}
-                            />
+                            <ListAltOutlinedIcon className="icon" />
                         </Link>
                     </li>
                     <li>
                         <Link to="/account">
-                            <AccountCircleOutlinedIcon
-                                style={{ color: '#FC206C', fontSize: 30 }}
-                            />
+                            <AccountCircleOutlinedIcon className="icon" />
                         </Link>
                     </li>
                 </ul>

@@ -4,7 +4,7 @@ import './App.css';
 
 import BottomTab from "./components/BottomTab";
 import Navbar from "./components/Navbar";
-import {Link, Route, BrowserRouter as Router, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import ActivityForm from "./pages/ActivityForm";
 import Home from "./pages/Home";
 import Account from "./pages/Account";

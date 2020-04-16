@@ -33,3 +33,13 @@
 #bottom-tab nav ul li a {
     -webkit-tap-highlight-color: transparent;
 }
+
+#bottom-tab .icon {
+    color: #FC206C;
+    font-size: 2em;
+    transition: 0.2s;
+}
+#bottom-tab .icon:hover {
+    color: #ff2683;
+    transition: 0.2s;
+}

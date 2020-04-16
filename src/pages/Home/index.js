@@ -1,12 +1,15 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import Button from "../../components/Button";
+import Math from '../../icons/subjects/math.svg';
+import Portuguese from '../../icons/subjects/portuguese.svg';
+import './styles.css';
+import WaitingCorrection from "../../components/WaitingCorrection";
 
 function Home() {
     return (
         <>
-            <h1 className="title">Home</h1>
-            <Button to="/activities/1" title="Revisar envio"/>
+            <h1 className="title">Aguardando correção</h1>
+            <WaitingCorrection title="Nome da atividade" activityId={2} subject={Math} />
+            <WaitingCorrection title="Nome da atividade" activityId={2} subject={Portuguese} />
         </>
     );
 }
