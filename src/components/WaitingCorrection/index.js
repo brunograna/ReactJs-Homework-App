@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../Button";
+import './styles.css';
 
 function WaitingCorrection({subject, title, activityId}) {
     return (
