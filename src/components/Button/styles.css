@@ -10,6 +10,7 @@
     color: #FFFFFF;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
     transition: 0.5s;
+    font-size: 0.9rem;
 }
 .primary-button:hover {
     background: #ed206d;
@@ -21,4 +22,26 @@
     font-size: 2rem;
     display: flex;
     flex-direction: row;
+}
+
+/* IPHONE 6/7/8 */
+@media screen and (max-width: 376px) {
+    .primary-button  {
+        font-size: 0.79rem;
+        text-align: center;
+    }
+    .primary-button svg {
+        font-size: 1.3rem;
+    }
+}
+
+/* IPHONE 6/7/8 PLUS */
+@media screen and (min-width: 376px) and (max-width: 420px) {
+    .primary-button  {
+        text-align: center;
+        font-size: 0.94rem;
+    }
+    .primary-button svg {
+        font-size: 1.8rem;
+    }
 }

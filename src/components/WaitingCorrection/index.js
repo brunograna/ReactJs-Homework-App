@@ -2,12 +2,12 @@ import React from "react";
 import Button from "../Button";
 import './styles.css';
 
-function WaitingCorrection({subject, title, activityId}) {
+function WaitingCorrection({data}) {
     return (
         <div className="waiting-correction">
-            <img src={subject} className="waiting-correction-icon" alt="Icon"/>
-            <h2 className="waiting-correction-title">{title}</h2>
-            <Button to={`/activities/${activityId}`} title="Revisar envio"/>
+            <img src={data.subject.icon} className="waiting-correction-icon" alt={data.subject.name}/>
+            <h2 className="waiting-correction-title">{data.title}</h2>
+            <Button to={`/activities/${data.activity_id}`} title="Revisar envio"/>
         </div>
     );
 }

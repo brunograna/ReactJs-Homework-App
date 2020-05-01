@@ -10,6 +10,21 @@
 }
 
 .waiting-correction-title {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     padding: 0 0.5em;
+    text-align: center;
+}
+
+/* IPHONE 6/7/8 */
+@media screen and (max-width: 376px) {
+    .waiting-correction-title {
+        font-size: 0.89rem;
+    }
+}
+
+/* IPHONE 6/7/8 PLUS */
+@media screen and (min-width: 376px) and (max-width: 420px) {
+    .waiting-correction-title {
+        font-size: 0.95rem;
+    }
 }
