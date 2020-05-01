@@ -27,6 +27,23 @@ body, input, button, h1, h2, h3, h4, h5, h6, p {
     text-align: left;
 }
 
+/* FORMS */
+
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+    width: 100%;
+    padding: 1em 0;
+}
+
+.input-group span {
+    font-weight: 400;
+    font-size: 0.95rem;
+    padding-left: 0.5em;
+    padding-bottom: 0.2em;
+}
+
 /* IPHONE 6/7/8 */
 @media screen and (max-width: 376px) {
     .title {

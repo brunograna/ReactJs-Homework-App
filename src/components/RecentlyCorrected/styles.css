@@ -68,7 +68,11 @@
 }
 
 .activity-briefing-title {
+    font-size: 1rem;
     padding-bottom: 0.2em;
+}
+.activity-briefing-content {
+    font-size: 0.9rem;
 }
 
 /* IPHONE 6/7/8 */

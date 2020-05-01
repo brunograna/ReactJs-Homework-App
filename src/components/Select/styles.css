@@ -1,0 +1,57 @@
+/* turn it off completely */
+select:active, select:hover {
+    outline: none
+}
+
+.matter {
+    position: relative;
+    display: flex;
+    flex-basis: 100%;
+    width: 100%;
+    border: 0;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 0.8em 1.5em;
+    font-size: 1rem;
+    font-weight: 400;
+    background: #fff;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+    color: #333333;
+}
+
+.matter:active, .matter:hover {
+    outline: none;
+}
+
+.matter-container {
+    position: relative;
+    width: 100%;
+}
+.matter-container:before {
+    content: "";
+    position: absolute;
+    right: 1.5em;
+    top: 1em;
+    z-index: 999;
+    border: solid #DADADA;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.matter option {
+    font-size: 1rem;
+    padding: 5em 0;
+    border: 0;
+    background: transparent;
+}
+
+option:hover, option:active, option:focus {
+    background-color: #fff;
+    border: 0;
+    outline: none !important;
+}

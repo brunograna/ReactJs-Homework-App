@@ -1,5 +1,5 @@
 import Success from "../../icons/status/success.svg";
-import Button from "../Button";
+import ButtonForward from "../ButtonForward";
 import React from "react";
 import './styles.css';
 
@@ -19,7 +19,7 @@ function RecentlyCorrected({data}) {
                 <p className="activity-briefing-content">{data.activity.briefing}</p>
             </section>
             <footer className="activity-actions">
-                <Button className="activity-goto" to={`/link/${data.activity.id}`} title="Ver detalhes"></Button>
+                <ButtonForward className="activity-goto" to={`/link/${data.activity.id}`} title="Ver detalhes"></ButtonForward>
             </footer>
         </article>
     );

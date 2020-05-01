@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../Button";
+import ButtonForward from "../ButtonForward";
 import './styles.css';
 
 function WaitingCorrection({data}) {
@@ -7,7 +7,7 @@ function WaitingCorrection({data}) {
         <div className="waiting-correction">
             <img src={data.subject.icon} className="waiting-correction-icon" alt={data.subject.name}/>
             <h2 className="waiting-correction-title">{data.title}</h2>
-            <Button to={`/activities/${data.activity_id}`} title="Revisar envio"/>
+            <ButtonForward to={`/activities/${data.activity_id}`} title="Revisar envio"/>
         </div>
     );
 }
