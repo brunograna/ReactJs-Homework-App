@@ -1,4 +1,4 @@
-import Success from "../../icons/status/success.svg";
+import Success from "../../assets/status/success.svg";
 import ButtonForward from "../ButtonForward";
 import React from "react";
 import './styles.css';

@@ -1,10 +1,10 @@
 import React from "react";
-import Math from '../../icons/subjects/math.svg';
 import './styles.css';
 import WaitingCorrection from "../../components/WaitingCorrection";
 import RecentlyCorrected from "../../components/RecentlyCorrected";
 
 function Home() {
+    console.log("Home - screen");
 
     function mockPortugueseWaitingCorrection() {
         return {

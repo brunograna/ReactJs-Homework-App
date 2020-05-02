@@ -1,9 +1,9 @@
 import React from "react";
 import './styles.css';
 
-function InputText({name, placeholder}) {
+function InputText({name, placeholder, ...rest}) {
     return (
-        <input type="text" className="input-text" name={name} placeholder={placeholder} />
+        <input {...rest} type="text" className="input-text" name={name} placeholder={placeholder} />
     );
 }
 

@@ -9,6 +9,10 @@ import ActivityForm from "./pages/ActivityForm";
 import Home from "./pages/Home";
 import Account from "./pages/Account";
 import MyActivities from "./pages/MyActivities";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import PrivateRoute from "./services/PrivateRoute";
+import Logout from "./pages/Logout";
 
 function App() {
     return (
@@ -17,18 +21,14 @@ function App() {
             <Router>
                 <main id="main-wrapper">
                     <Switch>
-                        <Route path="/activities/add">
-                            <ActivityForm />
-                        </Route>
-                        <Route path="/activities/me">
-                            <MyActivities />
-                        </Route>
-                        <Route path="/account">
-                            <Account />
-                        </Route>
-                        <Route path="/">
-                            <Home />
-                        </Route>
+                        <Route path="/sign-in" component={SignIn} />
+                        <Route path="/sign-up" component={SignUp} />
+                        <Route path="/logout" component={Logout}  />
+                        <PrivateRoute component={ActivityForm} path="/activities/add" />
+                        <PrivateRoute component={MyActivities} path="/activities/me" />
+                        <PrivateRoute component={Account} path="/account" />
+                        <PrivateRoute component={Home} path="/" />
+
                     </Switch>
                 </main>
                 <BottomTab/>
