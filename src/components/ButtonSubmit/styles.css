@@ -1,0 +1,50 @@
+.button-submit {
+    -webkit-tap-highlight-color: transparent;
+    display: flex;
+    flex: 1;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background: #FC206C;
+    border-radius: 25px;
+    padding: 0.5em 1.5em;
+    text-decoration: none;
+    color: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    transition: 0.5s;
+    font-size: 0.9rem;
+    border: 0;
+}
+.button-submit:hover {
+    background: #ed206d;
+    color: #ffffff;
+    transition: 0.5s;
+}
+.button-submit svg {
+    padding-left: 0.3em;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+}
+
+/* IPHONE 6/7/8 */
+@media screen and (max-width: 376px) {
+    .button-submit  {
+        font-size: 0.79rem;
+        text-align: center;
+    }
+    .button-submit svg {
+        font-size: 1.3rem;
+    }
+}
+
+/* IPHONE 6/7/8 PLUS */
+@media screen and (min-width: 376px) and (max-width: 420px) {
+    .button-submit  {
+        text-align: center;
+        font-size: 0.94rem;
+    }
+    .button-submit svg {
+        font-size: 1.8rem;
+    }
+}

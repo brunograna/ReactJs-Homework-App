@@ -2,7 +2,8 @@ import React from "react";
 import {Redirect} from "react-router-dom";
 import {logout} from "../../services/auth";
 
-function Logout() {
+function Logout({childSetIsAuthenticated}) {
+    childSetIsAuthenticated(false);
     logout();
 
     return (

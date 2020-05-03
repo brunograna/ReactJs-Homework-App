@@ -1,10 +1,9 @@
 import React from "react";
 import "./styles.css";
-import {isAuthenticated} from "../../services/auth";
 
-function Navbar() {
+function Navbar({childIsAuthenticated}) {
 
-    if (isAuthenticated()) {
+    if (childIsAuthenticated()) {
         return (
             <div id="top-tab">
                 <img id="profile-image"

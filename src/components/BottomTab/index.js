@@ -5,11 +5,10 @@ import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import ListAltOutlinedIcon from '@material-ui/icons/ListAltOutlined';
-import {isAuthenticated} from "../../services/auth";
 
-function BottomTab() {
+function BottomTab({childIsAuthenticated}) {
 
-    if (isAuthenticated()) {
+    if (childIsAuthenticated()) {
         return (
             <div id="bottom-tab">
                 <nav>

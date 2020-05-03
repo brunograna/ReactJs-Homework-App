@@ -1,20 +1,20 @@
 #main-wrapper {
-    display: flex;
-    flex-direction: column;
-    padding-right: 0;
-    padding-left: 0;
-    padding-bottom: 0;
-    max-width: 100%;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*padding-right: 0;*/
+    /*padding-left: 0;*/
+    /*padding-bottom: 0;*/
+    /*max-width: 100%;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*min-height: 100vh;*/
 }
 
 .container {
-    padding: 0 15px 0;
-    width: 100%;
-    max-width: 400px;
+    display: flex;
     flex: 1;
+    justify-content: center;
+    padding: 0 15px 0;
 }
 
 .title {
@@ -25,15 +25,9 @@
 
 /* IPHONE 6/7/8 */
 @media screen and (max-width: 376px) {
-    .waves {
-        display: none;
-    }
 }
 
 /* IPHONE 6/7/8 PLUS */
 @media screen and (min-width: 376px) and (max-width: 420px) {
-    .waves {
-        display: none;
-    }
 }
 

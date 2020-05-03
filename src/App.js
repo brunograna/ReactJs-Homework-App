@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './global.css';
 import './App.css';
 
@@ -15,15 +15,29 @@ import PrivateRoute from "./services/PrivateRoute";
 import Logout from "./pages/Logout";
 
 function App() {
+    // TODO set to false when AUTH is necessary
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    function childSetIsAuthenticated(state) {
+        setIsAuthenticated(state);
+    }
+    function childIsAuthenticated() {
+        return isAuthenticated;
+    }
+
     return (
         <div>
-            <Navbar />
+            <Navbar childIsAuthenticated={childIsAuthenticated} />
             <Router>
                 <main id="main-wrapper">
                     <Switch>
-                        <Route path="/sign-in" component={SignIn} />
+                        <Route path="/sign-in">
+                            <SignIn childSetIsAuthenticated={childSetIsAuthenticated} />
+                        </Route>
                         <Route path="/sign-up" component={SignUp} />
-                        <Route path="/logout" component={Logout}  />
+                        <Route path="/logout">
+                            <Logout childSetIsAuthenticated={childSetIsAuthenticated} />
+                        </Route>
                         <PrivateRoute component={ActivityForm} path="/activities/add" />
                         <PrivateRoute component={MyActivities} path="/activities/me" />
                         <PrivateRoute component={Account} path="/account" />
@@ -31,7 +45,7 @@ function App() {
 
                     </Switch>
                 </main>
-                <BottomTab/>
+                <BottomTab childIsAuthenticated={childIsAuthenticated}/>
             </Router>
         </div>
     );

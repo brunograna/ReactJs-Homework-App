@@ -1,0 +1,25 @@
+.options-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.options-box .box {
+    background-color: #ffffff;
+    padding: 1em 2em;
+    border-bottom: 1px solid rgba(51, 51, 51, 0.08);
+}
+.options-box .box:last-child {
+    border-bottom: none;
+}
+
+.options-box .box a{
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #333333;
+}
+.options-box .box .icon{
+    text-decoration: none;
+    color: #5e5e5e;
+}
