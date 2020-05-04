@@ -22,6 +22,35 @@
     padding: 1em 0 0;
     width: 100%;
 }
+.error-message {
+    text-align: center;
+    padding-bottom: 1.2em;
+}
+
+.error-message.has-failure {
+    color: #333333;
+    font-size: 0.9rem;
+}
+.error-message.hide {
+    display: none;
+    color: #333333;
+}
+
+.signup {
+    text-align: center;
+    padding: 0.5rem 0;
+}
+
+.signup a {
+    color: #ed206d;
+    text-decoration: none;
+}
+
+.signup a:hover {
+    color: #d71d64;
+    text-decoration: none;
+}
+
 
 /* IPHONE 6/7/8 */
 @media screen and (max-width: 376px) {

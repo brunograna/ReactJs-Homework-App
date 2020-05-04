@@ -1,8 +1,8 @@
 import axios from "axios";
-import {getToken} from "./auth";
+import {getToken, logout} from "./auth";
 
 const api = axios.create({
-    baseURL: 'http://10.0.0.104:3333'
+    baseURL: 'http://localhost:3333'
 });
 
 api.interceptors.request.use(async config => {
@@ -11,6 +11,12 @@ api.interceptors.request.use(async config => {
         config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
+});
+
+api.interceptors.response.use(async config => {
+    if (config.status === 403) {
+        logout();
+    }
 });
 
 export default api;

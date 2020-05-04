@@ -5,32 +5,35 @@ import InputPassword from "../../components/InputPassword";
 import ButtonSubmit from "../../components/ButtonSubmit";
 import api from "../../services/api";
 import {login, logout} from "../../services/auth";
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 function SignIn({childSetIsAuthenticated}) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [hasFailure, setHasFailure] = useState(false);
     const history = useHistory();
 
     async function handleSignIn(e) {
         e.preventDefault();
-        const response = await api.post('/auth/token', {username, password});
-        console.log(response);
-        if (response.status === 401) {
+        let response;
+        try {
+            response = await api.post('/auth/token', {username, password});
+            if (response.status === 200) {
+                const {access_token} = response.data;
+                login(access_token);
+                childSetIsAuthenticated(true);
+                history.push('/');
+            }
+        } catch (e) {
             setPassword('');
-            alert('Username or password incorrect');
+            setHasFailure(true);
             childSetIsAuthenticated(false);
             logout();
-        } else if (response.status === 200) {
-            const {access_token} = response.data;
-            login(access_token);
-            childSetIsAuthenticated(true);
-            history.push('/');
-        } else {
-            childSetIsAuthenticated(false);
-            logout();
-            alert('Something wrong ocurred');
         }
+    }
+
+    function isWithFailure() {
+        return hasFailure === true ? 'has-failure' : 'hide';
     }
 
     return (
@@ -52,9 +55,15 @@ function SignIn({childSetIsAuthenticated}) {
                             name="password"
                             value={password}
                             onChange={e => setPassword(e.target.value)}
-                            placeholder={"******"} />
+                            placeholder={"********"} />
+                    </div>
+                    <div className={`error-message ${isWithFailure()}`}>
+                        <span>Usuário ou senha incorretos</span>
                     </div>
                     <ButtonSubmit title='Entrar' />
+                    <div className={`signup`}>
+                        <span>Ainda não possui a sua conta ? <Link to={'/sign-up'}>Criar agora</Link></span>
+                    </div>
                 </form>
             </div>
             {/*<img src={Waves} className="waves" alt='Pink waves on the background'/>*/}
