@@ -17,6 +17,8 @@ api.interceptors.response.use(async config => {
     if (config.status === 403) {
         logout();
     }
+
+    return config;
 });
 
 export default api;

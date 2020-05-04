@@ -27,6 +27,13 @@
     padding-bottom: 1.2em;
 }
 
+.error-message span {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .error-message.has-failure {
     color: #333333;
     font-size: 0.9rem;

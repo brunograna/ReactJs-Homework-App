@@ -15,9 +15,9 @@ function SignIn({childSetIsAuthenticated}) {
 
     async function handleSignIn(e) {
         e.preventDefault();
-        let response;
         try {
-            response = await api.post('/auth/token', {username, password});
+            const response = await api.post('/auth/token', {username, password});
+            console.log(response.data);
             if (response.status === 200) {
                 const {access_token} = response.data;
                 login(access_token);

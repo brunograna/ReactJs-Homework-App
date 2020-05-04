@@ -36,7 +36,9 @@ function App() {
                         <Route path="/sign-in">
                             <SignIn childSetIsAuthenticated={childSetIsAuthenticated} />
                         </Route>
-                        <Route path="/sign-up" component={SignUp} />
+                        <Route path="/sign-up">
+                            <SignUp childSetIsAuthenticated={childSetIsAuthenticated}/>
+                        </Route>
                         <Route path="/logout">
                             <Logout childSetIsAuthenticated={childSetIsAuthenticated} />
                         </Route>
