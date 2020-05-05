@@ -1,3 +1,5 @@
+import JwtDecode from "jwt-decode";
+
 export const TOKEN_KEY = "homework-token";
 export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null;
 export const getToken = () => localStorage.getItem(TOKEN_KEY);
@@ -7,3 +9,11 @@ export const login = token => {
 export const logout = () => {
     localStorage.removeItem(TOKEN_KEY);
 };
+
+export const getDecodedToken = () => {
+    try {
+        return new JwtDecode(getToken());
+    } catch (e) {
+        return null;
+    }
+}

@@ -16,3 +16,7 @@
     width: 42px;
     height: 42px;
 }
+
+#profile-name {
+    padding: 0 0 0 1rem;
+}

@@ -2,6 +2,7 @@ import React from "react";
 import './styles.css';
 import TextArea from "../../components/TextArea";
 import Select from "../../components/Select";
+import ButtonSubmit from "../../components/ButtonSubmit";
 
 function ActivityForm() {
     function mockSelectData() {
@@ -31,6 +32,7 @@ function ActivityForm() {
                     <span>Digite aqui comentários sobre a sua dúvida</span>
                     <TextArea name="comment" placeholder="Digite aqui o seu comentário..." />
                 </div>
+                <ButtonSubmit title={'Enviar'}/>
             </form>
         </>
     );

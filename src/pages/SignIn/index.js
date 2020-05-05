@@ -25,10 +25,15 @@ function SignIn({childSetIsAuthenticated}) {
                 history.push('/');
             }
         } catch (e) {
-            setPassword('');
-            setHasFailure(true);
-            childSetIsAuthenticated(false);
-            logout();
+            console.log(e.response);
+            if (e.response != null && e.response.status === 401) {
+                setPassword('');
+                setHasFailure(true);
+                childSetIsAuthenticated(false);
+                logout();
+            } else {
+                alert('Something wrong happened');
+            }
         }
     }
 
