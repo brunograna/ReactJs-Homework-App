@@ -26,7 +26,7 @@ function SignUp({childSetIsAuthenticated}) {
                 console.log(response);
             }
         } catch (e) {
-            if (e.response != null && e.response.status == 400) {
+            if (e.response != null && e.response.status === 400) {
                 setPassword('');
                 setClientErrorMessage(e.response.data.detail);
             } else {

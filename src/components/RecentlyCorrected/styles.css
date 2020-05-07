@@ -10,7 +10,7 @@
     flex-wrap: wrap;
 }
 
-.recently-corrected head{
+.recently-corrected .head{
     display: flex;
     flex-direction: row;
     flex: 1;

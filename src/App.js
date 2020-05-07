@@ -13,18 +13,22 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import PrivateRoute from "./services/PrivateRoute";
 import Logout from "./pages/Logout";
-import {TOKEN_KEY} from "./services/auth";
+import {getToken, isAuthenticated, logout, TOKEN_KEY} from "./services/auth";
 import {useLocalStorage} from "./hooks/useLocalStorage";
 
 function App() {
     // TODO set to null when AUTH is necessary
-    const [isAuthenticated, setIsAuthenticated] = useLocalStorage(TOKEN_KEY, null);
+    const [tokenInLocalStorage, setTokenInLocalStorage] = useLocalStorage(TOKEN_KEY, localStorage.getItem(TOKEN_KEY));
 
     function childSetIsAuthenticated(state) {
-        setIsAuthenticated(state);
+        if (state === false) {
+            setTokenInLocalStorage(null);
+            logout();
+        }
+        setTokenInLocalStorage(getToken());
     }
     function childIsAuthenticated() {
-        return isAuthenticated;
+        return isAuthenticated();
     }
 
     return (

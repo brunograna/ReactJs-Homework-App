@@ -1,13 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Redirect} from "react-router-dom";
-import {logout} from "../../services/auth";
 
 function Logout({childSetIsAuthenticated}) {
-    childSetIsAuthenticated(false);
-    logout();
+
+    useEffect(() => {
+        childSetIsAuthenticated(false);
+    });
 
     return (
-        <Redirect path="/sign-in" />
+        <Redirect to="/sign-in" />
     );
 };
 

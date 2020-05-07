@@ -3,6 +3,8 @@ import "./styles.css";
 import {getDecodedToken} from "../../services/auth";
 
 function Navbar({childIsAuthenticated}) {
+    console.log(`Navbar - Rendered - isAuthenticated: ${childIsAuthenticated()}`);
+
     if (childIsAuthenticated()) {
         const tokenDecoded = getDecodedToken();
         return (
