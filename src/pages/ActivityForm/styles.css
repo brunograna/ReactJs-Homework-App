@@ -1,0 +1,99 @@
+.dropzone-container {
+    flex-direction: column;
+}
+
+.thumbsContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    margin: 0.5em 0;
+    max-width: 100%;
+    overflow-y: scroll;
+    padding: 1em;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    min-height: 140px;
+}
+
+.thumbsContainer .no-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 1;
+    width: 100%;
+    max-width: 100%;
+    opacity: 0.5;
+}
+
+.thumbsContainer .no-content .cloud-icon {
+    color: #333333;
+    margin-bottom: 0.2em;
+}
+
+.thumbsContainer .no-content p {
+    color: #333333;
+    width: 100%;
+    text-align: center;
+}
+
+.thumb {
+    display: inline-flex;
+    align-self: center;
+    border-radius: 2px;
+    border: 1px solid #eaeaea;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    width: 100px;
+    height: 100px;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.thumbInner {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.thumbInner:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(51, 51, 51, 0.34);
+}
+.thumb-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    color: rgba(255, 255, 255, 0.87);
+    cursor: pointer;
+}
+
+.img-preview {
+    display: block;
+    width: auto;
+    height: 100%;
+}
+
+.activity-addphoto{
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 0.5em;
+}

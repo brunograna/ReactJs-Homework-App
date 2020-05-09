@@ -17,15 +17,14 @@ import {getToken, isAuthenticated, logout, TOKEN_KEY} from "./services/auth";
 import {useLocalStorage} from "./hooks/useLocalStorage";
 
 function App() {
-    // TODO set to null when AUTH is necessary
-    const [tokenInLocalStorage, setTokenInLocalStorage] = useLocalStorage(TOKEN_KEY, localStorage.getItem(TOKEN_KEY));
+    const [tokenInLocalStorageState, setTokenInLocalStorageState] = useLocalStorage(TOKEN_KEY, getToken());
 
     function childSetIsAuthenticated(state) {
         if (state === false) {
-            setTokenInLocalStorage(null);
+            setTokenInLocalStorageState(null);
             logout();
         }
-        setTokenInLocalStorage(getToken());
+        setTokenInLocalStorageState(getToken());
     }
     function childIsAuthenticated() {
         return isAuthenticated();
