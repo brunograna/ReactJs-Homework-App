@@ -1,7 +1,7 @@
 import React from "react";
 import './styles.css';
 import WaitingCorrection from "../../components/WaitingCorrection";
-import RecentlyCorrected from "../../components/RecentlyCorrected";
+import ActivityOutdoor from "../../components/RecentlyCorrected";
 
 function Home() {
     console.log("Home - screen");
@@ -30,7 +30,7 @@ function Home() {
     function mockRecentlyCorrected() {
         return {
             teacher: {
-                image: 'https://i0.wp.com/www.passejaconcurseiro.com.br/wp-content/uploads/2017/03/opulent-profile-square-06-1.jpg?ssl=1',
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQNTjHSbM5Dv-1l3lWfo-xe-r7LeUtGVNypni0O7enY0EHLS8Pw&usqp=CAU',
                 name: 'Megan Fox',
                 level: 'Monitor'
             },
@@ -48,8 +48,8 @@ function Home() {
             <WaitingCorrection data={mockPortugueseWaitingCorrection()} />
             <WaitingCorrection data={mockMathWaitingCorrection()} />
 
-            <h1 className="title">Recentemente Corrigidas</h1>
-            <RecentlyCorrected data={mockRecentlyCorrected()}/>
+            <h1 className="title">Suas atividades corrigidas</h1>
+            <ActivityOutdoor data={mockRecentlyCorrected()}/>
         </>
     );
 }

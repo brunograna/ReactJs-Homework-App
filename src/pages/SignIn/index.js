@@ -6,9 +6,10 @@ import ButtonSubmit from "../../components/ButtonSubmit";
 import api from "../../services/api";
 import {login, logout} from "../../services/auth";
 import {Link, useHistory} from "react-router-dom";
+import {types, useAlert} from "react-alert";
 
 function SignIn({childSetIsAuthenticated}) {
-
+    const alert = useAlert();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [hasFailure, setHasFailure] = useState(false);
@@ -33,7 +34,7 @@ function SignIn({childSetIsAuthenticated}) {
                 childSetIsAuthenticated(false);
                 logout();
             } else {
-                alert('Something wrong happened');
+                alert.show('Algo de errado aconteceu', {type: types.ERROR});
             }
         }
     }

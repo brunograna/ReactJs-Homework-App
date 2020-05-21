@@ -8,6 +8,7 @@ import ButtonAttachment from "../../components/ButtonAttachment";
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import CloudOutlinedIcon from '@material-ui/icons/CloudOutlined';
 import {generateId} from "../../services/util";
+import InputText from "../../components/InputText";
 
 function ActivityForm() {
     function mockSelectData() {
@@ -70,6 +71,10 @@ function ActivityForm() {
         <>
             <h1 className="title">Envio de atividade</h1>
             <form action="">
+                <div className="input-group">
+                    <span>Titulo da atividade</span>
+                    <InputText name="title" placeholder="Digite aqui o seu título..." />
+                </div>
                 <div className="input-group">
                     <span>Selecione um assunto</span>
                     <Select data={mockSelectData()} name="matter" id="matter"/>

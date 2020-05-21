@@ -1,0 +1,30 @@
+.activity-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 0.8em 1.5em;
+    border-radius: 25px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    margin: 1em 0;
+    flex-wrap: wrap;
+}
+.activity-detail .detail .activity-title{
+    margin: 1.5em 0 0;
+    font-size: 1rem;
+    padding-bottom: 0.2em;
+}
+.activity-detail .detail .activity-content{
+    font-size: 0.9rem;
+}
+.activity-detail .head{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    flex-basis: 100%;
+}
+.teacher-details .teacher-level {
+    color: #333333;
+    font-size: 14px;
+    font-weight: 400;
+}

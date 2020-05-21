@@ -3,7 +3,7 @@ import ButtonForward from "../ButtonForward";
 import React from "react";
 import './styles.css';
 
-function RecentlyCorrected({data}) {
+function ActivityOutdoor({data, actionTitle}) {
     return (
         <article className="recently-corrected">
             <div className='head'>
@@ -19,10 +19,10 @@ function RecentlyCorrected({data}) {
                 <p className="activity-briefing-content">{data.activity.briefing}</p>
             </section>
             <footer className="activity-actions">
-                <ButtonForward className="activity-goto" to={`/link/${data.activity.id}`} title="Ver detalhes"></ButtonForward>
+                <ButtonForward className="activity-goto" to={`/activities/${data.activity.id}`} title={actionTitle ? actionTitle : 'Ver correção'}></ButtonForward>
             </footer>
         </article>
     );
 }
 
-export default RecentlyCorrected;
+export default ActivityOutdoor;

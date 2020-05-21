@@ -6,6 +6,7 @@ import ButtonSubmit from "../../components/ButtonSubmit";
 import api from "../../services/api";
 import {login, logout} from "../../services/auth";
 import {Link, useHistory} from "react-router-dom";
+import {types} from "react-alert";
 
 function SignUp({childSetIsAuthenticated}) {
     const [username, setUsername] = useState('');
@@ -22,7 +23,7 @@ function SignUp({childSetIsAuthenticated}) {
             if (response.status === 201) {
                 await logUserIn();
             } else {
-                alert('response is not 200');
+                alert.show('Algo inesperado aconteceu!', {type: types.INFO});
                 console.log(response);
             }
         } catch (e) {
@@ -30,7 +31,7 @@ function SignUp({childSetIsAuthenticated}) {
                 setPassword('');
                 setClientErrorMessage(e.response.data.detail);
             } else {
-                alert("Something wrong happened");
+                alert.show('Algo de errado aconteceu!', {type: types.ERROR});
             }
         }
     }

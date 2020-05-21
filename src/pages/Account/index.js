@@ -7,6 +7,7 @@ import './styles.css';
 function Account() {
     return (
         <>
+            <h1 className="title">Detalhes sobre a sua conta</h1>
             <div className="options-box">
                 <div className="box">
                     <Link to='/logout' >
@@ -16,7 +17,7 @@ function Account() {
                 </div>
                 <div className="box">
                     <Link to='/account/settings' >
-                        Configurações da conta
+                        Configurações
                         <SettingsOutlinedIcon className='icon' />
                     </Link>
                 </div>
