@@ -8,17 +8,19 @@ const api = axios.create({
 api.interceptors.request.use(async config => {
     const token = getToken();
     if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.Authorization = `Bearer ${token.replace(/['"]+/g, '')}`;
     }
     return config;
 });
 
-api.interceptors.response.use(async config => {
-    if (config.status === 403) {
+api.interceptors.response.use(function(response) {
+    return response;
+}, function(error) {
+    console.log("Response interceptor");
+    if (error.response.status === 401) {
         logout();
     }
 
-    return config;
 });
 
 export default api;

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import './styles.css';
 import TextArea from "../../components/TextArea";
-import Select from "../../components/Select";
 import ButtonSubmit from "../../components/ButtonSubmit";
 import {useDropzone} from 'react-dropzone';
 import ButtonAttachment from "../../components/ButtonAttachment";
@@ -9,22 +8,27 @@ import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined'
 import CloudOutlinedIcon from '@material-ui/icons/CloudOutlined';
 import {generateId} from "../../services/util";
 import InputText from "../../components/InputText";
+import api from "../../services/api";
+import {types, useAlert} from "react-alert";
 
 function ActivityForm() {
-    function mockSelectData() {
-        return {
-            options: [
-                {
-                    label: 'Português',
-                    value: 1
-                },
-                {
-                    label: 'Matemática',
-                    value: 2
-                }
-            ]
-        };
-    }
+    const alert = useAlert();
+    const [subjects, setSubjects] = useState({options: []});
+
+    useEffect(() => {
+
+        async function fetchData() {
+            try {
+                const result = await api.get('/subjects');
+                console.log(result);
+                setSubjects({options: result.data});
+            } catch (e) {
+                console.error(e);
+                alert.show('Algo de errado aconteceu!', {types: types.ERROR});
+            }
+        }
+        fetchData();
+    }, []);
 
     const [files, setFiles] = useState([]);
     const {getRootProps, getInputProps} = useDropzone({
@@ -77,7 +81,14 @@ function ActivityForm() {
                 </div>
                 <div className="input-group">
                     <span>Selecione um assunto</span>
-                    <Select data={mockSelectData()} name="matter" id="matter"/>
+                    <div className="matter-container">
+                        <select name="matter" id="matter" className="matter">
+                            <option>Selecione um assunto</option>
+                            {subjects.options.map((option) => (
+                                <option key={option.key} value={option.key}>{option.name}</option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
                 <div className="input-group">
                     <span>Digite aqui comentários sobre a sua dúvida</span>

@@ -8,7 +8,7 @@ function Select({data, name, id, ...rest}) {
             <select name={name} id={id} className={"matter"} {...rest}>
                 <option disabled>Selecione um assunto</option>
                 {data.options.map((option) => (
-                    <option key={option.value} value={option.value}>{option.label}</option>
+                    <option key={option.key} value={option.key}>{option.name}</option>
                 ))}
             </select>
         </div>
