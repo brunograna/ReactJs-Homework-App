@@ -1,28 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import ActivityOutdoor from "../../components/RecentlyCorrected";
+import api from "../../services/api";
+import {types, useAlert} from "react-alert";
 
 function ActivitiesList() {
+    const alert = useAlert();
+    const [activities, setActivities] = useState([]);
 
-    function mockRecentlyCorrected() {
-        return {
-            teacher: {
-                image: 'https://oficinadainteligencia.com.br/wp-content/uploads/2019/07/opulent-profile-square-07.jpg',
-                name: 'João',
-                level: 'Aprendiz'
-            },
-            activity: {
-                id: 3,
-                title: 'Titulo da Atividade',
-                briefing: 'Aqui entra uma pequena descrição do que a monitora Megan Fox escreveu e você ...'
+    useEffect(()=> {
+        async function fetchActivities() {
+            try {
+                const result = await api.get('/activities/author');
+                setActivities(result.data);
+            } catch (e) {
+                console.error(e);
+                alert.show('Algo de errado aconteceu!', {types: types.ERROR});
             }
         }
-    }
+        fetchActivities();
+    }, []);
 
     return (
         <>
-            <h1 className="title">Lista de atividades disponíveis para correção</h1>
-
-            <ActivityOutdoor data={mockRecentlyCorrected()} actionTitle="Ver detalhes"/>
+            <h1 className="title">Lista de todas as suas atividades</h1>
+            {activities ? activities.map((activityData) => (
+                <ActivityOutdoor activity={activityData} actionTitle="Ver detalhes"/>
+            )) : (
+                <>
+                </>
+            )}
         </>
     );
 }

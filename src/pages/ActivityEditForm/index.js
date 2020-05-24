@@ -12,7 +12,7 @@ import api from "../../services/api";
 import {types, useAlert} from "react-alert";
 import {useHistory} from 'react-router-dom';
 
-function ActivityForm() {
+function ActivityEditForm() {
     const alert = useAlert();
     const history = useHistory();
     const [sendingForm, setSendingForm] = useState(false);
@@ -33,7 +33,7 @@ function ActivityForm() {
             setImages(newFilesList);
         },
         onDropRejected(fileRejections, event) {
-            alert.show("Não foi possivel fazer upload desta imagem. \n Tamanho máximo de 4mb");
+            alert("Não foi possivel fazer upload desta imagem. \n Tamanho máximo de 4mb");
         }
     });
     const [hasFailure, setHasFailure] = useState(false);
@@ -194,10 +194,10 @@ function ActivityForm() {
                         ))
                     }
                 </div>
-                <ButtonSubmit disabled={sendingForm} title={sendingForm ? 'Enviando...' : 'Enviar atividade'}/>
+                <ButtonSubmit disabled={sendingForm} title={sendingForm ? 'Enviando...' : 'Atualizar atividade'}/>
             </form>
         </>
     );
 }
 
-export default ActivityForm;
+export default ActivityEditForm;

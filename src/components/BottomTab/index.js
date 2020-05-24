@@ -24,7 +24,7 @@ function BottomTab({childIsAuthenticated}) {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/activities/me">
+                            <Link to="/activities-availables">
                                 <ListAltOutlinedIcon className="icon" />
                             </Link>
                         </li>

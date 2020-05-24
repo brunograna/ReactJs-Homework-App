@@ -19,8 +19,15 @@
 
 .recently-corrected-status {
     margin-left: auto;
-    width: 35px;
-    height: 35px;
+    width: 30px !important;
+    height: 30px !important;
+    color: #00cc00;
+}
+.recently-not-corrected-status {
+    margin-left: auto;
+    width: 30px !important;
+    height: 30px !important;
+    color: #d71631;
 }
 
 .teacher-image{

@@ -17,6 +17,7 @@
     "react-dropzone": "11.0.1",
     "react-focus-lock": "2.2.1",
     "react-html5-camera-photo": "1.5.4",
+    "react-image-lightbox": "5.1.1",
     "react-router-dom": "5.1.2",
     "react-scripts": "3.4.1",
     "styled-components": "5.1.0"

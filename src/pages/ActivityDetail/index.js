@@ -1,15 +1,43 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import './styles.css';
 import CloudOutlinedIcon from "@material-ui/icons/CloudOutlined";
+import api from "../../services/api";
+import {types, useAlert} from "react-alert";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
 
 function ActivityDetail() {
     const {id} = useParams();
+    const alert = useAlert();
+    const history = useHistory();
     const [activityId, setActivityId] = useState(id);
+    const [activity, setActivity] = useState(undefined);
+    const [isPhotoOpen, setIsPhotoOpen] = useState(false);
+    const [photoIndex, setPhotoIndex] = useState(0);
 
     useEffect(() =>{
+        async function fetchActivity() {
+            try {
+                const result = await api.get(`/activities/${activityId}`);
+                if (!result.data.explanation) {
+                    alert.show('Atividade ainda não foi respondida!', {types: types.INFO});
+                    history.push('/');
+                }
+                setActivity(result.data);
+            } catch (e) {
+                console.error(e);
+                alert.show('Algo de errado aconteceu!', {types: types.ERROR});
+            }
+        }
+        fetchActivity();
+    }, []);
 
-    }, [activityId]);
+    function viewImage(image, index) {
+        setIsPhotoOpen(true);
+        setPhotoIndex(index);
+        return undefined;
+    }
 
     return (
         <>
@@ -17,29 +45,20 @@ function ActivityDetail() {
 
             <div className="activity-detail">
                 <div className='head'>
-                    <img className="teacher-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQNTjHSbM5Dv-1l3lWfo-xe-r7LeUtGVNypni0O7enY0EHLS8Pw&usqp=CAU" alt="Teacher"/>
+                    <img className="teacher-image" src={activity ? activity.explanation.author.avatar : ''} alt="Teacher"/>
                     <div className="teacher-details">
-                        <h3 className="teacher-name">Megan Fox</h3>
-                        <h4 className="teacher-level">Monitora</h4>
+                        <h3 className="teacher-name">{activity ? activity.explanation.author.username: 'Carregando'}</h3>
+                        <h4 className="teacher-level">Monitor</h4>
                     </div>
                 </div>
                 <div className="detail">
                     <h2 className="activity-title">Sua pergunta:</h2>
-                    <p className="activity-content">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                        veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                    <p className="activity-content">
+                        {activity ? activity.question : 'Carregando a sua pergunta...'}
                     </p>
                     <h2 className="activity-title">Resposta do monitor:</h2>
                     <p className="activity-content">
-                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                        doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                        veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-
-                        voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-                        magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-                        qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non
-                        numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam,
+                        {activity ? activity.explanation.description: 'Carregando a resposta do monitor...'}
                     </p>
                 </div>
             </div>
@@ -47,13 +66,48 @@ function ActivityDetail() {
             <div className="input-group">
                 <span>Fotos anexadas</span>
                 <div className='thumbsContainer'>
-                    <div className='no-content'>
-                        <CloudOutlinedIcon className='cloud-icon' />
-                        <p>Nenhuma foto foi anexada</p>
-                    </div>
+                    {activity ? (
+                            activity.images.length === 0 ? (
+                                <div className='no-content'>
+                                    <CloudOutlinedIcon className='cloud-icon' />
+                                    <p>Nenhuma foto foi anexada</p>
+                                </div>
+                            ) : (
+                                activity.images.map((image, index) => (
+                                    <div className='thumb' key={index} onClick={() => viewImage(image, index)}>
+                                        <div className='thumbInner'>
+                                            <img
+                                                src={image}
+                                                className='img-preview'
+                                            />
+                                        </div>
+                                    </div>
+                            )))
+                    ) : (
+                        <div className='no-content'>
+                            <CloudOutlinedIcon className='cloud-icon' />
+                            <p>Nenhuma foto foi anexada</p>
+                        </div>
+                    )}
+
                 </div>
             </div>
 
+            {isPhotoOpen && (
+                <Lightbox
+                    mainSrc={activity.images[photoIndex]}
+                    nextSrc={activity.images[(photoIndex + 1) % activity.images.length]}
+                    prevSrc={activity.images[(photoIndex + activity.images.length - 1) % activity.images.length]}
+                    onCloseRequest={() => setIsPhotoOpen(false)}
+                    onMovePrevRequest={() =>
+                        setPhotoIndex((photoIndex + activity.images.length - 1) % activity.images.length)
+                    }
+                    onMoveNextRequest={() =>
+                        setPhotoIndex((photoIndex + 1) % activity.images.length)
+                    }
+
+                />
+            )}
         </>
     );
 }

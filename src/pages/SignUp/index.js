@@ -65,6 +65,9 @@ function SignUp({childSetIsAuthenticated}) {
         if (!Array.isArray(message)) {
             message = [message];
         }
+        const messageTranslated = message.map((message) =>
+            message.replace('username', 'nome de usuário')
+                    .replace('password', 'senha'));
         setErrorMessage(message);
     }
 

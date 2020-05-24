@@ -16,11 +16,12 @@ api.interceptors.request.use(async config => {
 api.interceptors.response.use(function(response) {
     return response;
 }, function(error) {
-    console.log("Response interceptor");
-    if (error.response.status === 401) {
+    console.log("Response interceptor - "+error.response.status);
+    if (401 ===  error.response.status) {
+        console.log("401 - Response");
         logout();
     }
-
+    throw error;
 });
 
 export default api;
