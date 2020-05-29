@@ -1,0 +1,27 @@
+.activity-list {
+    list-style-type: none !important;
+}
+.activity-list li {
+    list-style: none;
+}
+.activity-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 0.8em 1.5em;
+    border-radius: 25px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    margin: 1em 0;
+    flex-wrap: wrap;
+}
+
+.activity-item div {
+    display: inline-flex;
+    align-self: center;
+}
+
+.activity-item span {
+    padding-left: 5px;
+    line-height: 35px;
+}

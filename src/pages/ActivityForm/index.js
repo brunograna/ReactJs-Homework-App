@@ -62,6 +62,7 @@ function ActivityForm() {
             <div className='thumb' key={file.imageId} onClick={() => removeImage(file.imageId)}>
                 <div className='thumbInner'>
                     <img
+                        alt={'Thumbnail preview'}
                         src={file.preview}
                         className='img-preview'
                     />
@@ -106,7 +107,7 @@ function ActivityForm() {
                 setSubjectKey('');
                 setQuestion('');
                 setImages([]);
-                history.push(response.headers.location);
+                history.push('/');
             }
 
         } catch (e) {

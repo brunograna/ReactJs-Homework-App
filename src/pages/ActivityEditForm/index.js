@@ -10,11 +10,13 @@ import {generateId} from "../../services/util";
 import InputText from "../../components/InputText";
 import api from "../../services/api";
 import {types, useAlert} from "react-alert";
-import {useHistory} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 
 function ActivityEditForm() {
+    const {id} = useParams();
     const alert = useAlert();
     const history = useHistory();
+    const [activityId, setAcitivityId] = useState(id);
     const [sendingForm, setSendingForm] = useState(false);
     const [subjects, setSubjects] = useState({options: []});
     const [title, setTitle] = useState('');
@@ -30,6 +32,7 @@ function ActivityEditForm() {
                 imageId: generateId(8)
             }));
             const newFilesList = images.concat(newFiles);
+            console.log(newFilesList);
             setImages(newFilesList);
         },
         onDropRejected(fileRejections, event) {
@@ -40,7 +43,7 @@ function ActivityEditForm() {
     const [errorMessage, setErrorMessage] = useState([]);
 
     useEffect(() => {
-        async function fetchData() {
+        async function fetchSubjects() {
             try {
                 const result = await api.get('/subjects');
                 console.log(result);
@@ -50,18 +53,42 @@ function ActivityEditForm() {
                 alert.show('Algo de errado aconteceu!', {types: types.ERROR});
             }
         }
-        fetchData();
+        async function fetchActivity() {
+            try {
+                const result = await api.get(`/activities/${id}/author`);
+                console.log(result);
+                setSubjectKey(result.data.subject.key);
+                const imageArray = [];
+                for (const imagePath of result.data.images) {
+                    const imagePreview = imagePath
+                    const fileName = imagePath.substring(imagePath.lastIndexOf('/') + 1);
+                    const blob = await (await fetch(imagePath)).blob();
+                    const file = new File([blob], fileName, {type: 'image/png'});
+                    let fileAssigned = Object.assign(file, {imageId: generateId(8), preview: imagePreview});
+                    imageArray.push(fileAssigned);
+                }
+                setImages(imageArray);
+                setTitle(result.data.title);
+                setQuestion(result.data.question);
+            } catch (e) {
+                console.error(e);
+                alert.show('Algo de errado aconteceu!', {types: types.ERROR});
+            }
+        }
+        fetchSubjects();
+        fetchActivity();
     }, []);
     useEffect(() => () => {
         // Make sure to revoke the data uris to avoid memory leaks
         images.forEach(file => URL.revokeObjectURL(file.preview));
     },  [images]);
 
-    const thumbs = images.map(file => {
+    const thumbs = images.map((file, index) => {
         return (
             <div className='thumb' key={file.imageId} onClick={() => removeImage(file.imageId)}>
                 <div className='thumbInner'>
                     <img
+                        alt={'Thumbnail preview'}
                         src={file.preview}
                         className='img-preview'
                     />
@@ -91,6 +118,7 @@ function ActivityEditForm() {
             return;
         }
 
+        formData.append('id', activityId);
         formData.append('title', title);
         formData.append('subjectKey', parseInt(subjectKey));
         formData.append('question', question);
@@ -99,14 +127,14 @@ function ActivityEditForm() {
         });
 
         try {
-            const response = await api.post('/activities', formData);
+            const response = await api.put(`/activities/${activityId}`, formData);
             console.log(response.headers);
-            if (response.status === 201) {
+            if (response.status === 204) {
                 setTitle('');
                 setSubjectKey('');
                 setQuestion('');
                 setImages([]);
-                history.push(response.headers.location);
+                history.push('/');
             }
 
         } catch (e) {

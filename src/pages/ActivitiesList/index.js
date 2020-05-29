@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from "react";
-import ActivityOutdoor from "../../components/RecentlyCorrected";
 import api from "../../services/api";
 import {types, useAlert} from "react-alert";
+import ButtonForward from "../../components/ButtonForward";
+import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
+import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
+import './styles.css';
 
 function ActivitiesList() {
     const alert = useAlert();
@@ -23,12 +26,26 @@ function ActivitiesList() {
     return (
         <>
             <h1 className="title">Lista de todas as suas atividades</h1>
+            <ul className='activity-list'>
             {activities ? activities.map((activityData) => (
-                <ActivityOutdoor activity={activityData} actionTitle="Ver detalhes"/>
+                <li>
+                    <article className='activity-item'>
+                        <div>
+                            {activityData.explanation ? (
+                                <CheckCircleOutlineOutlinedIcon className="recently-corrected-status"/>
+                            ) : (
+                                <CancelOutlinedIcon className="recently-not-corrected-status"/>
+                            )}
+                            <span>{activityData.title}</span>
+                        </div>
+                        <ButtonForward to={`/activities/${activityData.id}`} title={'Ver detalhe'}/>
+                    </article>
+                </li>
             )) : (
                 <>
                 </>
             )}
+            </ul>
         </>
     );
 }

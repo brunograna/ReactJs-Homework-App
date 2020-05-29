@@ -11,7 +11,7 @@ function ActivityDetail() {
     const {id} = useParams();
     const alert = useAlert();
     const history = useHistory();
-    const [activityId, setActivityId] = useState(id);
+    const [activityId] = useState(id);
     const [activity, setActivity] = useState(undefined);
     const [isPhotoOpen, setIsPhotoOpen] = useState(false);
     const [photoIndex, setPhotoIndex] = useState(0);
@@ -31,7 +31,7 @@ function ActivityDetail() {
             }
         }
         fetchActivity();
-    }, []);
+    }, [activityId]);
 
     function viewImage(image, index) {
         setIsPhotoOpen(true);
@@ -41,11 +41,11 @@ function ActivityDetail() {
 
     return (
         <>
-            <h1 className="title">Detalhes sobre a atividade</h1>
+            <h1 className="title">{activity ? activity.title : ''}</h1>
 
             <div className="activity-detail">
                 <div className='head'>
-                    <img className="teacher-image" src={activity ? activity.explanation.author.avatar : ''} alt="Teacher"/>
+                    <img className="teacher-image" src={activity ? activity.explanation.author.avatar : ''} alt="Teacher avatar"/>
                     <div className="teacher-details">
                         <h3 className="teacher-name">{activity ? activity.explanation.author.username: 'Carregando'}</h3>
                         <h4 className="teacher-level">Monitor</h4>
@@ -75,8 +75,9 @@ function ActivityDetail() {
                             ) : (
                                 activity.images.map((image, index) => (
                                     <div className='thumb' key={index} onClick={() => viewImage(image, index)}>
-                                        <div className='thumbInner'>
+                                        <div className='thumbInner' style={{cursor: 'pointer'}}>
                                             <img
+                                                alt={`Anexo auxiliar ${index}`}
                                                 src={image}
                                                 className='img-preview'
                                             />

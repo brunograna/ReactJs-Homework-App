@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import './styles.css';
 import WaitingCorrection from "../../components/WaitingCorrection";
-import ActivityOutdoor from "../../components/RecentlyCorrected";
+import ActivityOutdoor from "../../components/ActivityOutdoor";
 import api from "../../services/api";
 import {types, useAlert} from "react-alert";
 
