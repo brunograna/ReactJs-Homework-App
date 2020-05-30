@@ -4,6 +4,7 @@ import WaitingCorrection from "../../components/WaitingCorrection";
 import ActivityOutdoor from "../../components/ActivityOutdoor";
 import api from "../../services/api";
 import {types, useAlert} from "react-alert";
+import FreeBreakfastOutlinedIcon from "@material-ui/icons/FreeBreakfastOutlined";
 
 function Home() {
     const alert = useAlert();
@@ -43,9 +44,18 @@ function Home() {
             ))}
 
             <h1 className="title">Suas atividades corrigidas</h1>
+            {activitiesWithAnswer.length === 0 ? (
+                <h2 id="empty-data">
+                    <FreeBreakfastOutlinedIcon id={'empty-icon'}/>
+                    <span>
+                        Nenhuma atividade registrada
+                    </span>
+                </h2>
+            ): (<></>)}
             {activitiesWithAnswer.map((activitiesWithAnswerData) => (
                 <ActivityOutdoor activity={activitiesWithAnswerData}/>
             ))}
+
         </>
     );
 }

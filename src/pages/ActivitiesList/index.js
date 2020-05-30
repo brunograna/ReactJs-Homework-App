@@ -5,6 +5,7 @@ import ButtonForward from "../../components/ButtonForward";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 import './styles.css';
+import FreeBreakfastOutlinedIcon from '@material-ui/icons/FreeBreakfastOutlined';
 
 function ActivitiesList() {
     const alert = useAlert();
@@ -27,6 +28,14 @@ function ActivitiesList() {
         <>
             <h1 className="title">Lista de todas as suas atividades</h1>
             <ul className='activity-list'>
+                {activities.length === 0 ? (
+                    <h2 id="empty-data">
+                        <FreeBreakfastOutlinedIcon id={'empty-icon'}/>
+                        <span>
+                        Nenhuma atividade registrada
+                    </span>
+                    </h2>
+                ) : (<></>)}
             {activities ? activities.map((activityData) => (
                 <li>
                     <article className='activity-item'>

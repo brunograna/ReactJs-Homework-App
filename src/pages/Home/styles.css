@@ -1,0 +1,17 @@
+#empty-data {
+    padding: 2em 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    font-size: 1.3rem;
+    color: #d4d4d4;
+    font-weight: 300;
+}
+#empty-data #empty-icon {
+    margin: 1rem 0;
+    font-size: 3rem;
+    color: #d4d4d4;
+}

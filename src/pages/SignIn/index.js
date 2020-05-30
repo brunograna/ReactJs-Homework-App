@@ -54,7 +54,7 @@ function SignIn({childSetIsAuthenticated}) {
                             name="username"
                             value={username}
                             onChange={e => setUsername(e.target.value)}
-                            placeholder={"my_username"} />
+                            placeholder={"seu nome de usuário"} />
                     </div>
                     <div className="input-group">
                         <span>Senha de acesso</span>
