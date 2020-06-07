@@ -12,10 +12,11 @@ function Home() {
     const [activitiesWithAnswer, setActivitiesWithAnswer] = useState([]);
 
     useEffect(()=> {
+        window.scrollTo(0, 0);
         async function fetchActivitiesWithoutAnswer() {
             try {
-                const result = await api.get('/activities/author?with_explanation=false');
-                setActivitiesWithoutAnswer(result.data);
+                const result = await api.get('/activities/me?with_explanation=false');
+                setActivitiesWithoutAnswer(result.data.data);
             } catch (e) {
                 console.error(e);
                 alert.show('Algo de errado aconteceu!', {types: types.ERROR});
@@ -23,8 +24,8 @@ function Home() {
         }
         async function fetchActivitiesWithAnswer() {
             try {
-                const result = await api.get('/activities/author?with_explanation=true');
-                setActivitiesWithAnswer(result.data);
+                const result = await api.get('/activities/me?with_explanation=true');
+                setActivitiesWithAnswer(result.data.data);
             } catch (e) {
                 console.error(e);
                 alert.show('Algo de errado aconteceu!', {types: types.ERROR});
@@ -40,7 +41,9 @@ function Home() {
                 <h1 className="title">Aguardando correção</h1>
             ): (<></>)}
             {activitiesWithoutAnswer.map((activityWithoutAnswerData) => (
-                <WaitingCorrection activity={activityWithoutAnswerData} />
+                <div key={`waiting-correction-${activityWithoutAnswerData.id}`}>
+                    <WaitingCorrection activity={activityWithoutAnswerData} />
+                </div>
             ))}
 
             <h1 className="title">Suas atividades corrigidas</h1>
@@ -53,7 +56,9 @@ function Home() {
                 </h2>
             ): (<></>)}
             {activitiesWithAnswer.map((activitiesWithAnswerData) => (
-                <ActivityOutdoor activity={activitiesWithAnswerData}/>
+                <div key={`activity-outdoor-${activitiesWithAnswerData.id}`}>
+                    <ActivityOutdoor activity={activitiesWithAnswerData}/>
+                </div>
             ))}
 
         </>

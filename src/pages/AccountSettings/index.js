@@ -8,6 +8,7 @@ function AccountSettings() {
     const [email, setEmail] = useState('');
 
     useEffect(()=> {
+        window.scrollTo(0, 0);
         let decodedToken = getDecodedToken();
         setUsername(decodedToken.username);
         setEmail(decodedToken.email);

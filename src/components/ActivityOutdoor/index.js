@@ -5,8 +5,14 @@ import CheckCircleOutlineOutlinedIcon from '@material-ui/icons/CheckCircleOutlin
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 
 function ActivityOutdoor({activity, actionTitle}) {
+
+    function limitMessage(message) {
+        let messageLimited = message.substring(0, 200);
+        return `${messageLimited}...`;
+    }
+
     return (
-        <article className="recently-corrected">
+        <article className="recently-corrected" key={`recently-corrected-${activity.id}`}>
             <div className='head'>
                 <img className="teacher-image" src={activity.explanation ? activity.explanation.author.avatar : activity.author.avatar} alt="Teacher"/>
                 <div className="teacher-details">
@@ -18,11 +24,10 @@ function ActivityOutdoor({activity, actionTitle}) {
                 ) : (
                     <CancelOutlinedIcon className="recently-not-corrected-status"/>
                 )}
-                {/*<img className="recently-corrected-status" src={Success} alt="Activity Status"/>*/}
             </div>
             <section className="activity-briefing">
                 <h1 className="activity-briefing-title">{activity.title}</h1>
-                <p className="activity-briefing-content">{activity.explanation ? activity.explanation.description : activity.question}</p>
+                <p className="activity-briefing-content">{activity.explanation ? limitMessage(activity.explanation.description) : limitMessage(activity.question)}</p>
             </section>
             <footer className="activity-actions">
                 <ButtonForward className="activity-goto" to={`/activities/${activity.id}`} title={actionTitle ? actionTitle : 'Ver correção'}></ButtonForward>

@@ -20,6 +20,7 @@ api.interceptors.response.use(function(response) {
     if (401 ===  error.response.status) {
         console.log("401 - Response");
         logout();
+        window.location = '/';
     }
     throw error;
 });

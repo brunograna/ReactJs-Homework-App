@@ -9,6 +9,11 @@
     margin: 1em 0;
     flex-wrap: wrap;
 }
+
+#activity-detail-thumbs .thumb {
+    width: 100px;
+}
+
 .activity-detail .detail .activity-title{
     margin: 1.5em 0 0;
     font-size: 1rem;

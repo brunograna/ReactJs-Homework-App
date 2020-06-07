@@ -13,6 +13,7 @@
     "react": "16.13.1",
     "react-alert": "^7.0.1",
     "react-alert-template-mui": "1.0.4",
+    "react-content-loader": "5.0.4",
     "react-dom": "16.13.1",
     "react-dropzone": "11.0.1",
     "react-focus-lock": "2.2.1",

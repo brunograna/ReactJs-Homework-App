@@ -6,6 +6,7 @@ import api from "../../services/api";
 import {types, useAlert} from "react-alert";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
+import ContentLoader from 'react-content-loader'
 
 function ActivityDetail() {
     const {id} = useParams();
@@ -17,6 +18,7 @@ function ActivityDetail() {
     const [photoIndex, setPhotoIndex] = useState(0);
 
     useEffect(() =>{
+        window.scrollTo(0, 0);
         async function fetchActivity() {
             try {
                 const result = await api.get(`/activities/${activityId}`);
@@ -39,33 +41,57 @@ function ActivityDetail() {
         return undefined;
     }
 
+    const titleLoader = () => (<ContentLoader width="250" height="40" viewBox="0 0 600 60">
+        <rect x="25" y="25" rx="3" ry="3" width="70%" height="355" />
+    </ContentLoader>);
+
+    const headLoading = () => (<ContentLoader width="300" height="45" viewBox="0 0 600 70">
+        <rect x="0" y="0" rx="50" ry="50" width="70" height="70" />
+        <rect x="80" y="17" rx="4" ry="4" width="200" height="17" />
+        <rect x="80" y="40" rx="3" ry="3" width="150" height="14" />
+    </ContentLoader>);
+
+    const contentLoading = () => (<ContentLoader width={'270'} height={'100px'} viewBox="0 0 500 150">
+        <rect x="00" y="17" rx="4" ry="4" width="70%" height="17" />
+        <rect x="0" y="49" rx="3" ry="3" width="100%" height="14" />
+        <rect x="00" y="90" rx="4" ry="4" width="70%" height="17" />
+        <rect x="0" y="120" rx="3" ry="3" width="100%" height="14" />
+    </ContentLoader>);
+
     return (
         <>
-            <h1 className="title">{activity ? activity.title : ''}</h1>
-
+            <h1 className="title">{activity ? activity.title : titleLoader()}</h1>
             <div className="activity-detail">
                 <div className='head'>
-                    <img className="teacher-image" src={activity ? activity.explanation.author.avatar : ''} alt="Teacher avatar"/>
-                    <div className="teacher-details">
-                        <h3 className="teacher-name">{activity ? activity.explanation.author.username: 'Carregando'}</h3>
-                        <h4 className="teacher-level">Monitor</h4>
-                    </div>
+                    {activity ? (
+                        <>
+                            <img className="teacher-image" src={activity.explanation.author.avatar} alt={`${activity.explanation.author.username} avatar`}/>
+                            <div className="teacher-details">
+                                <h3 className="teacher-name">{activity.explanation.author.username}</h3>
+                                <h4 className="teacher-level">{'Monitor'}</h4>
+                            </div>
+                        </>
+                    ) : headLoading()}
                 </div>
                 <div className="detail">
-                    <h2 className="activity-title">Sua pergunta:</h2>
-                    <p className="activity-content">
-                        {activity ? activity.question : 'Carregando a sua pergunta...'}
-                    </p>
-                    <h2 className="activity-title">Resposta do monitor:</h2>
-                    <p className="activity-content">
-                        {activity ? activity.explanation.description: 'Carregando a resposta do monitor...'}
-                    </p>
+                    { activity ? (
+                        <>
+                            <h2 className="activity-title">Sua pergunta:</h2>
+                            <p className="activity-content">
+                                {activity ? activity.question : 'Carregando a sua pergunta...'}
+                            </p>
+                            <h2 className="activity-title">Resposta do monitor:</h2>
+                            <p className="activity-content">
+                                {activity ? activity.explanation.description: 'Carregando a resposta do monitor...'}
+                            </p>
+                        </>
+                    ): contentLoading()}
                 </div>
             </div>
 
             <div className="input-group">
                 <span>Fotos anexadas</span>
-                <div className='thumbsContainer'>
+                <div className='thumbsContainer' id={'activity-detail-thumbs'}>
                     {activity ? (
                             activity.images.length === 0 ? (
                                 <div className='no-content'>

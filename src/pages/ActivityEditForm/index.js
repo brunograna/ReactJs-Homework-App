@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import './styles.css';
+import '../ActivityForm/styles.css';
 import TextArea from "../../components/TextArea";
 import ButtonSubmit from "../../components/ButtonSubmit";
 import {useDropzone} from 'react-dropzone';
@@ -43,11 +43,12 @@ function ActivityEditForm() {
     const [errorMessage, setErrorMessage] = useState([]);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         async function fetchSubjects() {
             try {
                 const result = await api.get('/subjects');
                 console.log(result);
-                setSubjects({options: result.data});
+                setSubjects({options: result.data.data});
             } catch (e) {
                 console.error(e);
                 alert.show('Algo de errado aconteceu!', {types: types.ERROR});
@@ -55,7 +56,7 @@ function ActivityEditForm() {
         }
         async function fetchActivity() {
             try {
-                const result = await api.get(`/activities/${id}/author`);
+                const result = await api.get(`/activities/${id}/me`);
                 console.log(result);
                 setSubjectKey(result.data.subject.key);
                 const imageArray = [];

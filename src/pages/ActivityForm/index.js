@@ -40,11 +40,12 @@ function ActivityForm() {
     const [errorMessage, setErrorMessage] = useState([]);
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         async function fetchData() {
             try {
                 const result = await api.get('/subjects');
                 console.log(result);
-                setSubjects({options: result.data});
+                setSubjects({options: result.data.data});
             } catch (e) {
                 console.error(e);
                 alert.show('Algo de errado aconteceu!', {types: types.ERROR});

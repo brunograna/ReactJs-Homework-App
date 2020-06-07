@@ -1,0 +1,14 @@
+.paginator {
+    display: flex;
+    justify-content: space-between;
+}
+
+.paginator button.hide {
+    visibility: hidden;
+}
+
+.paginator button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}

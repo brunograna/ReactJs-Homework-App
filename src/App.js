@@ -20,6 +20,8 @@ import AlertMUITemplate from 'react-alert-template-mui';
 import {positions, Provider as AlertProvider, transitions} from 'react-alert'
 import ActivityEditForm from "./pages/ActivityEditForm";
 import AccountEdit from "./pages/AccountSettings";
+import ActivitiesAvailable from "./pages/ActivitiesAvailable";
+import ExplanationForm from "./pages/ExplanationForm";
 
 function App() {
     const [tokenInLocalStorageState, setTokenInLocalStorageState] = useLocalStorage(TOKEN_KEY, getToken());
@@ -61,7 +63,9 @@ function App() {
                                 <Logout childSetIsAuthenticated={childSetIsAuthenticated} />
                             </Route>
                             <PrivateRoute component={ActivityForm} path="/activities/add" />
+                            <PrivateRoute component={ActivitiesAvailable} path="/activities-availables" />
                             <PrivateRoute component={ActivityEditForm} path="/activities/:id/edit" />
+                            <PrivateRoute component={ExplanationForm} path="/activities/:id/explanation" />
                             <PrivateRoute component={ActivitiesList} path="/activities/me" />
                             <PrivateRoute component={ActivityDetail} path="/activities/:id" />
                             <PrivateRoute component={AccountEdit} path="/account/settings" />

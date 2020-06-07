@@ -12,10 +12,11 @@ function ActivitiesList() {
     const [activities, setActivities] = useState([]);
 
     useEffect(()=> {
+        window.scrollTo(0, 0);
         async function fetchActivities() {
             try {
-                const result = await api.get('/activities/author');
-                setActivities(result.data);
+                const result = await api.get('/activities/me');
+                setActivities(result.data.data);
             } catch (e) {
                 console.error(e);
                 alert.show('Algo de errado aconteceu!', {types: types.ERROR});
@@ -26,7 +27,7 @@ function ActivitiesList() {
 
     return (
         <>
-            <h1 className="title">Lista de todas as suas atividades</h1>
+            <h1 className="title">Todas as suas atividades</h1>
             <ul className='activity-list'>
                 {activities.length === 0 ? (
                     <h2 id="empty-data">
@@ -37,17 +38,17 @@ function ActivitiesList() {
                     </h2>
                 ) : (<></>)}
             {activities ? activities.map((activityData) => (
-                <li>
+                <li key={activityData.id}>
                     <article className='activity-item'>
                         <div>
                             {activityData.explanation ? (
-                                <CheckCircleOutlineOutlinedIcon className="recently-corrected-status"/>
+                                <CheckCircleOutlineOutlinedIcon className="recently-corrected-status" titleAccess={"Atividade corrigida"}/>
                             ) : (
-                                <CancelOutlinedIcon className="recently-not-corrected-status"/>
+                                <CancelOutlinedIcon className="recently-not-corrected-status" titleAccess={"Atividade não corrigida"}/>
                             )}
                             <span>{activityData.title}</span>
                         </div>
-                        <ButtonForward to={`/activities/${activityData.id}`} title={'Ver detalhe'}/>
+                        <ButtonForward titleAccess={activityData.explanation ? `Ir para atividade` : `Editar atividade`} to={activityData.explanation ? `/activities/${activityData.id}` : `/activities/${activityData.id}/edit`}/>
                     </article>
                 </li>
             )) : (
