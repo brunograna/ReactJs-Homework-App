@@ -11,6 +11,9 @@ import {useHistory, useParams} from 'react-router-dom';
 import ContentLoader from "react-content-loader";
 import {getDecodedToken} from "../../services/auth";
 import Lightbox from "react-image-lightbox";
+import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
+import {useDropzone} from "react-dropzone";
+import ButtonAttachment from "../../components/ButtonAttachment";
 
 function ExplanationForm() {
     const {id} = useParams();
@@ -27,6 +30,22 @@ function ExplanationForm() {
     const [errorMessage, setErrorMessage] = useState([]);
     const [isPhotoOpen, setIsPhotoOpen] = useState(false);
     const [photoIndex, setPhotoIndex] = useState(0);
+    const [explanationImages, setExplanationImages] = useState([]);
+    const {getRootProps, getInputProps} = useDropzone({
+        accept: 'image/*',
+        maxSize: 4000000,
+        onDrop: acceptedFiles => {
+            const newFiles = acceptedFiles.map(file => Object.assign(file, {
+                preview: URL.createObjectURL(file),
+                imageId: generateId(8)
+            }));
+            const newFilesList = explanationImages.concat(newFiles);
+            setExplanationImages(newFilesList);
+        },
+        onDropRejected(fileRejections, event) {
+            alert.show("Não foi possivel fazer upload desta imagem. \n Tamanho máximo de 4mb");
+        }
+    });
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -60,6 +79,26 @@ function ExplanationForm() {
         fetchActivity();
     }, []);
 
+    const thumbs = explanationImages.map(file => {
+        return (
+            <div className='thumb' key={file.imageId} onClick={() => removeImage(file.imageId)}>
+                <div className='thumbInner'>
+                    <img
+                        alt={'Thumbnail preview'}
+                        src={file.preview}
+                        className='img-preview'
+                    />
+                    <DeleteOutlineOutlinedIcon className='thumb-delete'/>
+                </div>
+            </div>
+        )
+    });
+
+    function removeImage(imageId) {
+        const newFilesList = explanationImages.filter(elem => elem.imageId !== imageId);
+        setExplanationImages(newFilesList);
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
         setSendingForm(true);
@@ -72,9 +111,16 @@ function ExplanationForm() {
             setSendingForm(false);
             return;
         }
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('activityId', activityId);
+        formData.append('description', description);
+        explanationImages.forEach((image) => {
+            formData.append('images', image);
+        });
 
         try {
-            const response = await api.post(`/explanations`, {title, activityId, description});
+            const response = await api.post(`/explanations`, formData);
             console.log(response.headers);
             if (response.status === 201) {
                 setTitle('');
@@ -204,6 +250,24 @@ function ExplanationForm() {
                               value={description}
                               onChange={e => setDescription(e.target.value)}
                               placeholder="Digite aqui o seu comentário..." />
+                </div>
+                <div className="input-group dropzone-container">
+                    <span>Anexar fotos pode ajudar na explicação</span>
+                    <div {...getRootProps({className: 'dropzone activity-addphoto'})}>
+                        <input {...getInputProps()} />
+                        <ButtonAttachment title="Adicionar nova foto"/>
+                    </div>
+                </div>
+                <div className="input-group">
+                    <span>Fotos anexadas</span>
+                    <div className='thumbsContainer'>
+                        {explanationImages.length === 0 ? (
+                            <div className='no-content'>
+                                <CloudOutlinedIcon className='cloud-icon' />
+                                <p>Nenhuma foto foi anexada ainda</p>
+                            </div>
+                        ) : thumbs}
+                    </div>
                 </div>
                 <div className={`error-message ${isWithFailure()}`}>
                     {

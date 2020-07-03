@@ -14,6 +14,7 @@ function ActivityDetail() {
     const history = useHistory();
     const [activityId] = useState(id);
     const [activity, setActivity] = useState(undefined);
+    const [modalImages, setModalImages] = useState([]);
     const [isPhotoOpen, setIsPhotoOpen] = useState(false);
     const [photoIndex, setPhotoIndex] = useState(0);
 
@@ -27,6 +28,8 @@ function ActivityDetail() {
                     history.push('/');
                 }
                 setActivity(result.data);
+                setModalImages([...result.data.images, ...result.data.explanation.images]);
+                console.log(modalImages);
             } catch (e) {
                 console.error(e);
                 alert.show('Algo de errado aconteceu!', {types: types.ERROR});
@@ -90,16 +93,16 @@ function ActivityDetail() {
             </div>
 
             <div className="input-group">
-                <span>Fotos anexadas</span>
+                <span>Fotos anexadas nesta atividade</span>
                 <div className='thumbsContainer' id={'activity-detail-thumbs'}>
                     {activity ? (
-                            activity.images.length === 0 ? (
+                            modalImages.length === 0 ? (
                                 <div className='no-content'>
                                     <CloudOutlinedIcon className='cloud-icon' />
                                     <p>Nenhuma foto foi anexada</p>
                                 </div>
                             ) : (
-                                activity.images.map((image, index) => (
+                                modalImages.map((image, index) => (
                                     <div className='thumb' key={index} onClick={() => viewImage(image, index)}>
                                         <div className='thumbInner' style={{cursor: 'pointer'}}>
                                             <img
@@ -109,7 +112,8 @@ function ActivityDetail() {
                                             />
                                         </div>
                                     </div>
-                            )))
+                                )
+                            ))
                     ) : (
                         <div className='no-content'>
                             <CloudOutlinedIcon className='cloud-icon' />
@@ -122,15 +126,15 @@ function ActivityDetail() {
 
             {isPhotoOpen && (
                 <Lightbox
-                    mainSrc={activity.images[photoIndex]}
-                    nextSrc={activity.images[(photoIndex + 1) % activity.images.length]}
-                    prevSrc={activity.images[(photoIndex + activity.images.length - 1) % activity.images.length]}
+                    mainSrc={modalImages[photoIndex]}
+                    nextSrc={modalImages[(photoIndex + 1) % modalImages.length]}
+                    prevSrc={modalImages[(photoIndex + modalImages.length - 1) % modalImages.length]}
                     onCloseRequest={() => setIsPhotoOpen(false)}
                     onMovePrevRequest={() =>
-                        setPhotoIndex((photoIndex + activity.images.length - 1) % activity.images.length)
+                        setPhotoIndex((photoIndex + modalImages.length - 1) % modalImages.length)
                     }
                     onMoveNextRequest={() =>
-                        setPhotoIndex((photoIndex + 1) % activity.images.length)
+                        setPhotoIndex((photoIndex + 1) % modalImages.length)
                     }
 
                 />
