@@ -11,7 +11,7 @@
 }
 
 #activity-detail-thumbs .thumb {
-    width: 100px;
+    max-width: 100px;
 }
 
 .activity-detail .detail .activity-title{

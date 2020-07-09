@@ -28,7 +28,7 @@ function SignIn({childSetIsAuthenticated}) {
             }
         } catch (e) {
             console.log(e.response);
-            if (e.response != null && e.response.status === 401) {
+            if (e.response != null && e.response.status === 400) {
                 setPassword('');
                 setHasFailure(true);
                 childSetIsAuthenticated(false);
